@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using Models;
-using Eleganza.DTOs;
+using Eleganza.DTO;
 
 namespace Eleganza.Profiles
 {
-    public class ApplicationUserProfile :Profile
+    public class ApplicationUserProfiles :Profile
     {
-        public ApplicationUserProfile()
+        public ApplicationUserProfiles()
         {
             CreateMap<ApplicationUserDTO, ApplicationUser>()
             .ForMember(dest => dest.Id, opt => opt.Ignore())

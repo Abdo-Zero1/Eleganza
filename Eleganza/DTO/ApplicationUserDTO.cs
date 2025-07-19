@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Eleganza.DTOs
+namespace Eleganza.DTO
 {
     public class ApplicationUserDTO
     {
