@@ -33,6 +33,9 @@ namespace Eleganza.Controllers
                 product.ProductDescription,
                 product.Price,
                 product.ImageUrl,
+                product.quantity,
+                product.Color,
+                product.Tag,
                 product.CategoryID,
                 CategoryName = categories.ContainsKey(product.CategoryID) ? categories[product.CategoryID] : "Unknown"
             });

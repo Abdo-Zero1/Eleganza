@@ -14,6 +14,8 @@ namespace Models
         public decimal Price { get; set; }
         public int quantity { get; set; }
         public string ImageUrl { get; set; }
+        public string Color { get; set; }
+        public string Tag { get; set; }
         public int CategoryID { get; set; }
         public Category Category { get; set; }
     }
