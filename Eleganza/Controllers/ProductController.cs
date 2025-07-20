@@ -28,9 +28,9 @@ namespace Eleganza.Controllers
 
             var productList = products.Select(product => new
             {
-                product.Id,
-                product.Name,
-                product.Description,
+                product.ProductId,
+                product.ProductName,
+                product.ProductDescription,
                 product.Price,
                 product.ImageUrl,
                 product.CategoryID,
@@ -73,8 +73,8 @@ namespace Eleganza.Controllers
 
             var product = new Product
             {
-                Name = dto.Name!,
-                Description = dto.Description,
+                ProductName = dto.Name!,
+                ProductDescription = dto.Description,
                 Price = dto.Price,
                 quantity = dto.quantity,
                 CategoryID = dto.CategoryID,
@@ -90,9 +90,9 @@ namespace Eleganza.Controllers
                 message = "✔️ Product created successfully.",
                 data = new
                 {
-                    product.Id,
-                    product.Name,
-                    product.Description,
+                    product.ProductId,
+                    product.ProductName,
+                    product.ProductDescription,
                     product.Price,
                     product.ImageUrl,
                     product.CategoryID
@@ -103,7 +103,7 @@ namespace Eleganza.Controllers
         [HttpGet("{id}")]
         public IActionResult GetProduct(int id)
         {
-            var product = productRepository.GetOne(expression: p => p.Id == id);
+            var product = productRepository.GetOne(expression: p => p.ProductId == id);
             if (product == null)
             {
                 return NotFound(new { success = false, message = "❌ Product not found." });
@@ -117,9 +117,9 @@ namespace Eleganza.Controllers
                 success = true,
                 data = new
                 {
-                    product.Id,
-                    product.Name,
-                    product.Description,
+                    product.ProductId,
+                    product.ProductName,
+                    product.ProductDescription,
                     product.Price,
                     product.ImageUrl,
                     product.CategoryID,
@@ -137,7 +137,7 @@ namespace Eleganza.Controllers
                 return BadRequest(ModelState);
             }
 
-            var product = productRepository.GetOne(expression: p => p.Id == id);
+            var product = productRepository.GetOne(expression: p => p.ProductId == id);
             if (product == null)
             {
                 return NotFound(new { success = false, message = "❌ Product not found." });
@@ -163,8 +163,8 @@ namespace Eleganza.Controllers
                 imagePath = "/Images/Product/" + fileName;
             }
 
-            product.Name = dto.Name!;
-            product.Description = dto.Description;
+            product.ProductName = dto.Name!;
+            product.ProductDescription = dto.Description;
             product.Price = dto.Price;
             product.quantity = dto.quantity;
             product.CategoryID = dto.CategoryID;
@@ -179,9 +179,9 @@ namespace Eleganza.Controllers
                 message = "✔️ Product updated successfully.",
                 data = new
                 {
-                    product.Id,
-                    product.Name,
-                    product.Description,
+                    product.ProductId,
+                    product.ProductName,
+                    product.ProductDescription,
                     product.Price,
                     product.ImageUrl,
                     product.CategoryID
@@ -189,10 +189,27 @@ namespace Eleganza.Controllers
             });
         }
 
+        [HttpGet("Photo/{ProductId}")]
+        public IActionResult GetPhotoUrl(int ProductId)
+        {
+            var product = productRepository.GetOne(expression: p => p.ProductId == ProductId);
+            if (product == null)
+            {
+                return NotFound(new { Message = "Product Not Found" });
+            }
+
+            var imageUrl = !string.IsNullOrEmpty(product.ImageUrl)
+                ? $"{Request.Scheme}://{Request.Host}{product.ImageUrl}"
+                : null;
+
+            return Ok(new { Url = imageUrl });
+        }
+
+
         [HttpDelete("{id}")]
         public IActionResult DeleteProduct(int id)
         {
-            var product = productRepository.GetOne(expression: p => p.Id == id);
+            var product = productRepository.GetOne(expression: p => p.ProductId == id);
             if (product == null)
             {
                 return NotFound(new { success = false, message = "❌ Product not found." });
