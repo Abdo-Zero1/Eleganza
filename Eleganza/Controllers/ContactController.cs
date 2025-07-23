@@ -37,6 +37,7 @@ namespace Eleganza.Controllers
                 Email = c.User?.Email,
                 phone = c.User?.PhoneNumber,
                 Address = c.User?.Adderss,
+                Message = c.Message,
 
             }).ToList();
             return Ok(contacts);

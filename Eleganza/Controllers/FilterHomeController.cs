@@ -45,6 +45,8 @@ namespace Eleganza.Controllers
             {
                 ProductId = p.ProductId,
                 ProductName = p.ProductName,
+                ProductDescription = p.ProductDescription,
+                quantity = p.quantity,
                 Price = p.Price,
                 Color = p.Color,
                 Tag = p.Tag,
@@ -53,6 +55,36 @@ namespace Eleganza.Controllers
 
             return Ok(result);
         }
+        [HttpGet("search")]
+        public IActionResult Search(string keyword)
+        {
+            if (string.IsNullOrWhiteSpace(keyword))
+                return BadRequest("Please provide a search keyword.");
+
+            keyword = keyword.ToLower(); 
+
+            var products = productRepository.Get().Where(p =>
+                (p.ProductName != null && p.ProductName.ToLower().Contains(keyword)) ||
+                (p.Tag != null && p.Tag.ToLower().Contains(keyword))
+            ).Select(p => new Product
+            {
+                ProductId = p.ProductId,
+                ProductName = p.ProductName,
+                ProductDescription = p.ProductDescription,
+                quantity = p.quantity,
+                Price = p.Price,
+                Color = p.Color,
+                Tag = p.Tag,
+                ImageUrl = p.ImageUrl
+            }).ToList();
+
+            return Ok(products);
+        }
+
+
+
+
+
 
     }
 }
