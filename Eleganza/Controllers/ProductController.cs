@@ -36,6 +36,7 @@ namespace Eleganza.Controllers
                 product.quantity,
                 product.Color,
                 product.Tag,
+                product.Rating,
                 product.CategoryID,
                 CategoryName = categories.ContainsKey(product.CategoryID) ? categories[product.CategoryID] : "Unknown"
             });
@@ -80,6 +81,9 @@ namespace Eleganza.Controllers
                 ProductDescription = dto.Description,
                 Price = dto.Price,
                 quantity = dto.quantity,
+                Color = dto.Color,
+                Tag = dto.Tag,
+                Rating = dto.Rating,
                 CategoryID = dto.CategoryID,
                 ImageUrl = imagePath
             };
@@ -98,6 +102,10 @@ namespace Eleganza.Controllers
                     product.ProductDescription,
                     product.Price,
                     product.ImageUrl,
+                    product.quantity,
+                    product.Color,
+                    product.Tag,
+                    product.Rating,
                     product.CategoryID
                 }
             });
@@ -125,6 +133,10 @@ namespace Eleganza.Controllers
                     product.ProductDescription,
                     product.Price,
                     product.ImageUrl,
+                    product.quantity,
+                    product.Color,
+                    product.Tag,
+                    product.Rating,
                     product.CategoryID,
                     CategoryName = categoryName
                 }
@@ -170,6 +182,9 @@ namespace Eleganza.Controllers
             product.ProductDescription = dto.Description;
             product.Price = dto.Price;
             product.quantity = dto.quantity;
+            product.Color = dto.Color;
+            product.Tag = dto.Tag;
+            product.Rating = dto.Rating;
             product.CategoryID = dto.CategoryID;
             product.ImageUrl = imagePath ?? product.ImageUrl;
 
@@ -187,6 +202,10 @@ namespace Eleganza.Controllers
                     product.ProductDescription,
                     product.Price,
                     product.ImageUrl,
+                    product.quantity,
+                    product.Color,
+                    product.Tag,
+                    product.Rating,
                     product.CategoryID
                 }
             });

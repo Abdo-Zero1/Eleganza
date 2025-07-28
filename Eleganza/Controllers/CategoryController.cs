@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using Models;
+using System.Linq.Expressions;
 using Utility;
 
 namespace Eleganza.Controllers
@@ -15,16 +17,19 @@ namespace Eleganza.Controllers
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryRepository categoryRepository;
+        private readonly IProductRepository productRepository;
 
-        public CategoryController(ICategoryRepository categoryRepository)
+        public CategoryController(ICategoryRepository categoryRepository, IProductRepository productRepository)
         {
             this.categoryRepository = categoryRepository;
+            this.productRepository = productRepository;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
-            var categories = categoryRepository.Get();
+            var categories = categoryRepository.Get(Include: new Expression<Func<Category, object>>[] {c=>c.Products});
+
             return Ok(categories);
 
         }

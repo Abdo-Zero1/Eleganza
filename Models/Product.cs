@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Models
@@ -16,7 +17,9 @@ namespace Models
         public string ImageUrl { get; set; }
         public string Color { get; set; }
         public string Tag { get; set; }
+        public int Rating { get; set; } 
         public int CategoryID { get; set; }
+        [JsonIgnore]
         public Category Category { get; set; }
     }
 }

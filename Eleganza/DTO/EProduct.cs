@@ -21,6 +21,12 @@ namespace Eleganza.DTO
         [Required(ErrorMessage = "Quantity is required.")]
         [Range(1, int.MaxValue, ErrorMessage = "Quantity must be at least 1.")]
         public int quantity { get; set; }
+        [Required(ErrorMessage = "Color is required.")]
+        public string Color { get; set; }
+        [Required(ErrorMessage = "Tag is required.")]
+        public string Tag { get; set; }
+        [Range(0, 5, ErrorMessage = "Rating must be between 0 and 5.")]
+        public int Rating { get; set; } = 0;
 
         public IFormFile? ImageUrl { get; set; }
 
