@@ -13,7 +13,7 @@ namespace Eleganza.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles =$"{SD.AdminRole}")]
+  //  [Authorize(Roles =$"{SD.AdminRole}")]
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryRepository categoryRepository;
